@@ -2,7 +2,11 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, useScroll } from "@react-three/drei";
 import { useRef } from "react";
-import { CAMERA_START_POSITION, CAMERA_PATH } from "../utils/config";
+import {
+  CAMERA_START_POSITION,
+  CAMERA_PATH,
+  PATH_SHAPE,
+} from "../utils/config";
 import { useCamera } from "../contexts/Camera";
 
 const Camera = () => {
@@ -38,9 +42,11 @@ const Camera = () => {
   });
 
   return (
-    <group ref={cameraGroup} position={[0, 0, CAMERA_START_POSITION]}>
-      <PerspectiveCamera makeDefault fov={30} />
-    </group>
+    <>
+      <group ref={cameraGroup} position={[0, 0, CAMERA_START_POSITION]}>
+        <PerspectiveCamera makeDefault fov={30} />
+      </group>
+    </>
   );
 };
 

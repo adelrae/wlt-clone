@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 
-const DISTANCE = 150;
+const DISTANCE = 200;
 const SPEED = 2;
 
 export default function CameraRig() {
