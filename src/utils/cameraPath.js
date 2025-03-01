@@ -1,8 +1,7 @@
 import * as THREE from "three";
 
 export const pathPoints = [
-  new THREE.Vector3(0, 0, 38),
-  new THREE.Vector3(0, 0, 0),
+  new THREE.Vector3(0, 0, 36),
   new THREE.Vector3(0, 0, -400),
 ];
 
@@ -18,5 +17,5 @@ export const cameraPath = new THREE.CatmullRomCurve3(
   pathPoints,
   false,
   "centripetal",
-  0.5
+  1
 );
