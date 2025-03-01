@@ -46,16 +46,16 @@ const TextSections = () => {
       <group position-z={30}>
         <Text
           font="/fonts/fonnts.com-Neulis_Sans_Medium.ttf"
-          position={[-1.25, -1.1, 0]}
-          fontSize={0.47}
-          maxWidth={4}
+          position={[-1.25, -1.25, 0]}
+          fontSize={0.55}
+          maxWidth={5}
           lineHeight={1}
         >
           Elevate Your Digital Presence
         </Text>
         <Text
           font="/fonts/fonnts.com-Neulis_Sans_Regular.ttf"
-          position={[-2.45, -0.4, 0]}
+          position={[-2.93, -0.4, 0]}
           color={"#D15606"}
           fontSize={0.1}
           letterSpacing={0.2}
@@ -64,10 +64,10 @@ const TextSections = () => {
         </Text>
         <Text
           font="/fonts/fonnts.com-Neulis_Sans_Regular.ttf"
-          position={[2.2, -1.1, 0]}
+          position={[2.4, -1.2, 0]}
           color={"#ffffff"}
-          fontSize={0.1}
-          maxWidth={2}
+          fontSize={0.125}
+          maxWidth={2.3}
           lineHeight={1.5}
         >
           We make great digital experiences. Scroll to find out how we do it.
