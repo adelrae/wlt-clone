@@ -192,7 +192,9 @@ export default function Room(props) {
             });
             hasStartedOtherAnimations.current = true;
           }
-        } else if (!hasPassedLastWindow) {
+        }
+
+        if (!hasPassedLastWindow) {
           time = (scroll.offset * animationDuration) / 0.9;
           firstAnimationRef.current.time = time;
         }

@@ -17,7 +17,7 @@ const Scene = () => {
         }}
         dpr={[1, 2]}
       >
-        <ScrollControls pages={4} damping={0.1}>
+        <ScrollControls pages={4} damping={0.25}>
           <Experience />
         </ScrollControls>
       </Canvas>

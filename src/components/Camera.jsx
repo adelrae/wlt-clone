@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, useScroll } from "@react-three/drei";
 import { useRef } from "react";
-import { cameraPath } from "../utils/cameraPath";
+import { CAMERA_START_POSITION, CAMERA_PATH } from "../utils/config";
 import { useCamera } from "../contexts/Camera";
 
 const Camera = () => {
@@ -27,10 +27,10 @@ const Camera = () => {
     lastScroll.current = lerpedScrollOffset;
 
     // Get the current position on the CatmullRomCurve3 path
-    const curPoint = cameraPath.getPoint(lerpedScrollOffset);
+    const curPoint = CAMERA_PATH.getPoint(lerpedScrollOffset);
 
     // Smoothly move the camera to the current point
-    cameraGroup.current?.position.lerp(curPoint, delta * 10);
+    cameraGroup.current?.position.lerp(curPoint, delta * 20);
 
     // Update context
     setCameraPosition(cameraGroup.current?.position);
@@ -38,7 +38,7 @@ const Camera = () => {
   });
 
   return (
-    <group ref={cameraGroup} position={[0, 0, 36]}>
+    <group ref={cameraGroup} position={[0, 0, CAMERA_START_POSITION]}>
       <PerspectiveCamera makeDefault fov={30} />
     </group>
   );
