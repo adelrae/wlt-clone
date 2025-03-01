@@ -46,7 +46,7 @@ const TextSections = () => {
       <group position-z={30}>
         <Text
           font="/fonts/fonnts.com-Neulis_Sans_Medium.ttf"
-          position={[-1.25, -1.25, 0]}
+          position={[-1.75, -1.25, 0]}
           fontSize={0.55}
           maxWidth={5}
           lineHeight={1}
@@ -55,7 +55,7 @@ const TextSections = () => {
         </Text>
         <Text
           font="/fonts/fonnts.com-Neulis_Sans_Regular.ttf"
-          position={[-2.93, -0.4, 0]}
+          position={[-3.45, -0.4, 0]}
           color={"#D15606"}
           fontSize={0.1}
           letterSpacing={0.2}
