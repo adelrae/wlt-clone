@@ -4,7 +4,7 @@ export const CAMERA_START_POSITION = 40;
 
 export const PATH_POINTS = [
   new THREE.Vector3(0, 0, CAMERA_START_POSITION),
-  new THREE.Vector3(0, 0, -490),
+  new THREE.Vector3(0, 0, -450),
 ];
 
 export const PATH_SHAPE = () => {

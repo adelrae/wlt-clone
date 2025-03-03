@@ -7,7 +7,7 @@ import { useCamera } from "../contexts/Camera";
 
 // Define constants
 const ROTATION_THRESHOLD = 1; // Start tilting and rotating at t=0.9
-const MAX_TILT_ANGLE = -Math.PI / 4.3; // Negative 45 degrees for downward tilt
+const MAX_TILT_ANGLE = -Math.PI / 5.5; // Negative 45 degrees for downward tilt
 
 const Camera = () => {
   const scroll = useScroll();
@@ -35,7 +35,7 @@ const Camera = () => {
     // Apply downward tilt
     const tiltProgress = THREE.MathUtils.smoothstep(
       lerpedScrollOffset,
-      0.7,
+      0.75,
       ROTATION_THRESHOLD
     );
     const tiltAngle = tiltProgress * MAX_TILT_ANGLE;
