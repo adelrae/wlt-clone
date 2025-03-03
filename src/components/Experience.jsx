@@ -11,23 +11,21 @@ import Camera from "./Camera";
 const Experience = () => {
   return useMemo(() => (
     <>
-      <Suspense fallback={null}>
-        <Room position={[-6, -4, 0]} />
-        <Camera />
-        <TextSections />
+      <Room position={[-6, -4, 0]} />
+      <Camera />
+      <TextSections />
 
-        {/* Environment */}
-        <CameraRig />
-        <Background />
-        <Sparkles
-          color={"yellow"}
-          count={40}
-          scale={[6, 6.8, 4]}
-          size={2}
-          speed={1}
-          position-z={30}
-        />
-      </Suspense>
+      {/* Environment */}
+      <CameraRig />
+      <Background />
+      <Sparkles
+        color={"yellow"}
+        count={40}
+        scale={[6, 6.8, 4]}
+        size={2}
+        speed={1}
+        position-z={30}
+      />
       <Perf position="top-left" />
     </>
   ));

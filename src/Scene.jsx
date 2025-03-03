@@ -1,12 +1,10 @@
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import Experience from "./components/Experience";
-import { ScrollControls, useProgress } from "@react-three/drei";
+import { ScrollControls } from "@react-three/drei";
 import Cursor from "./components/Cursor";
 
 const Scene = () => {
-  const { progress } = useProgress();
-
   return (
     <>
       <Canvas
