@@ -60,6 +60,9 @@ export default function Room(props) {
   const godrayRef = useRef();
   const windowsRef = useRef([]);
 
+  const computerMeshRef = useRef();
+  const mobileMeshRef = useRef();
+
   const { cameraPosition, lerpedScrollOffset } = useCamera();
 
   // Animation
@@ -134,6 +137,60 @@ export default function Room(props) {
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.needsUpdate = true;
     });
+  }, []);
+
+  useEffect(() => {
+    const config = {
+      crossOrigin: "anonymous",
+      loop: true,
+      muted: true,
+    };
+
+    // Computer Texure
+    const computerVideo = document.createElement("video");
+    computerVideo.src = "/model-textures/desktop-video.mp4";
+    computerVideo.crossOrigin = config.crossOrigin;
+    computerVideo.loop = config.loop;
+    computerVideo.muted = config.muted;
+    computerVideo.play();
+
+    const computerVideoTexture = new THREE.VideoTexture(computerVideo);
+    computerVideoTexture.minFilter = THREE.LinearFilter;
+    computerVideoTexture.magFilter = THREE.LinearFilter;
+    computerVideoTexture.format = THREE.RGBAFormat;
+
+    // Mobile Texure
+    const mobileVideo = document.createElement("video");
+    mobileVideo.src = "/model-textures/mobile-video.mp4";
+    mobileVideo.crossOrigin = config.crossOrigin;
+    mobileVideo.loop = config.loop;
+    mobileVideo.muted = config.muted;
+    mobileVideo.play();
+
+    const mobileVideoTexture = new THREE.VideoTexture(mobileVideo);
+    mobileVideoTexture.minFilter = THREE.LinearFilter;
+    mobileVideoTexture.magFilter = THREE.LinearFilter;
+    mobileVideoTexture.format = THREE.RGBAFormat;
+
+    // Attaching textures
+    if (computerMeshRef.current) {
+      computerMeshRef.current.material.map = computerVideoTexture;
+      computerMeshRef.current.material.needsUpdate = true;
+    }
+    if (mobileMeshRef.current) {
+      mobileMeshRef.current.material.map = mobileVideoTexture;
+      mobileMeshRef.current.material.needsUpdate = true;
+    }
+
+    // Cleanup
+    return () => {
+      computerVideo.pause();
+      computerVideo.remove();
+      computerVideoTexture.dispose();
+      mobileVideo.pause();
+      mobileVideo.remove();
+      mobileVideoTexture.dispose();
+    };
   }, []);
 
   useFrame((state, delta) => {
@@ -809,24 +866,30 @@ export default function Room(props) {
             <meshBasicMaterial map={room4items} />
           </mesh>
           <mesh
+            ref={computerMeshRef}
             name="monitor_screen"
             castShadow
             receiveShadow
             geometry={nodes.monitor_screen.geometry}
-            material={nodes.monitor_screen.material}
+            // material={nodes.monitor_screen.material}
             position={[3.407, -3.418, 10.523]}
             rotation={[Math.PI, -Math.PI / 9, Math.PI]}
-          />
+          >
+            <meshBasicMaterial />
+          </mesh>
           <mesh
+            ref={mobileMeshRef}
             name="phone_screen"
             castShadow
             receiveShadow
             geometry={nodes.phone_screen.geometry}
-            material={nodes.phone_screen.material}
+            // material={nodes.phone_screen.material}
             position={[-4.156, 0.784, 30.27]}
             rotation={[-1.82, -0.362, 0.949]}
             scale={0.173}
-          />
+          >
+            <meshBasicMaterial />
+          </mesh>
           <mesh
             name="Plane007_room4_floor"
             castShadow
