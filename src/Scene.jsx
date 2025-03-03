@@ -8,7 +8,6 @@ import Loading from "./components/Loading";
 
 const Scene = () => {
   const { progress } = useProgress();
-  const [isSceneReady, setIsSceneReady] = useState(false);
 
   return (
     <>
