@@ -1,12 +1,18 @@
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import Experience from "./components/Experience";
-import { ScrollControls } from "@react-three/drei";
+import { ScrollControls, useProgress } from "@react-three/drei";
 import Cursor from "./components/Cursor";
+import { useEffect, useState } from "react";
+import Loading from "./components/Loading";
 
 const Scene = () => {
+  const { progress } = useProgress();
+  const [isSceneReady, setIsSceneReady] = useState(false);
+
   return (
     <>
+      <Loading progress={progress} />
       <Canvas
         gl={{
           alpha: false,
