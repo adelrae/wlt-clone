@@ -1,4 +1,4 @@
-import { OrbitControls, Sparkles } from "@react-three/drei";
+import { Sparkles } from "@react-three/drei";
 import { Suspense, useMemo } from "react";
 import { Perf } from "r3f-perf";
 
@@ -28,8 +28,6 @@ const Experience = () => {
           position-z={30}
         />
       </Suspense>
-
-      {/* <OrbitControls /> */}
       <Perf position="top-left" />
     </>
   ));
