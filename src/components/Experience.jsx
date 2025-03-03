@@ -26,7 +26,7 @@ const Experience = () => {
         speed={1}
         position-z={30}
       />
-      <Perf position="top-left" />
+      {/* <Perf position="top-left" /> */}
     </>
   ));
 };
