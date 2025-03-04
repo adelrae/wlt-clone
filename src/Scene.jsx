@@ -4,9 +4,10 @@ import Experience from "./components/Experience";
 import { ScrollControls } from "@react-three/drei";
 import Cursor from "./components/Cursor";
 import Loading from "./components/Loading";
+import { useResponsive } from "./contexts/Responsive";
 
 const Scene = () => {
-  
+  const { isMobile } = useResponsive();
 
   return (
     <>
@@ -23,7 +24,7 @@ const Scene = () => {
           <Experience />
         </ScrollControls>
       </Canvas>
-      <Cursor />
+      {!isMobile && <Cursor />}
     </>
   );
 };
