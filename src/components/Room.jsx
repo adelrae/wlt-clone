@@ -11,6 +11,7 @@ import godrayVertexShader from "../shaders/godray/vertex.glsl";
 import godrayFragmentShader from "../shaders/godray/fragment.glsl";
 import { useCamera } from "../contexts/Camera";
 import Water from "./Water";
+import { useResponsive } from "../contexts/Responsive";
 
 // VARIABLES
 const roomInitialPositionX = -6;
@@ -64,6 +65,7 @@ export default function Room(props) {
   const mobileMeshRef = useRef();
 
   const { cameraPosition, lerpedScrollOffset } = useCamera();
+  const { isMobile } = useResponsive();
 
   // Animation
   const firstAnimationRef = useRef();
@@ -146,52 +148,57 @@ export default function Room(props) {
       muted: true,
     };
 
-    // Computer Texure
-    const computerVideo = document.createElement("video");
-    computerVideo.src = "/model-textures/desktop-video.mp4";
-    computerVideo.crossOrigin = config.crossOrigin;
-    computerVideo.loop = config.loop;
-    computerVideo.muted = config.muted;
-    computerVideo.play();
+    if (isMobile) {
+      computerMeshRef.current.material.color = new THREE.Color("#fff");
+      mobileMeshRef.current.material.color = new THREE.Color("#fff");
+    } else {
+      // Computer Texure
+      const computerVideo = document.createElement("video");
+      computerVideo.src = "/model-textures/desktop-video.mp4";
+      computerVideo.crossOrigin = config.crossOrigin;
+      computerVideo.loop = config.loop;
+      computerVideo.muted = config.muted;
+      computerVideo.play();
 
-    const computerVideoTexture = new THREE.VideoTexture(computerVideo);
-    computerVideoTexture.minFilter = THREE.LinearFilter;
-    computerVideoTexture.magFilter = THREE.LinearFilter;
-    computerVideoTexture.format = THREE.RGBAFormat;
+      const computerVideoTexture = new THREE.VideoTexture(computerVideo);
+      computerVideoTexture.minFilter = THREE.LinearFilter;
+      computerVideoTexture.magFilter = THREE.LinearFilter;
+      computerVideoTexture.format = THREE.RGBAFormat;
 
-    // Mobile Texure
-    const mobileVideo = document.createElement("video");
-    mobileVideo.src = "/model-textures/mobile-video.mp4";
-    mobileVideo.crossOrigin = config.crossOrigin;
-    mobileVideo.loop = config.loop;
-    mobileVideo.muted = config.muted;
-    mobileVideo.play();
+      // Mobile Texure
+      const mobileVideo = document.createElement("video");
+      mobileVideo.src = "/model-textures/mobile-video.mp4";
+      mobileVideo.crossOrigin = config.crossOrigin;
+      mobileVideo.loop = config.loop;
+      mobileVideo.muted = config.muted;
+      mobileVideo.play();
 
-    const mobileVideoTexture = new THREE.VideoTexture(mobileVideo);
-    mobileVideoTexture.minFilter = THREE.LinearFilter;
-    mobileVideoTexture.magFilter = THREE.LinearFilter;
-    mobileVideoTexture.format = THREE.RGBAFormat;
+      const mobileVideoTexture = new THREE.VideoTexture(mobileVideo);
+      mobileVideoTexture.minFilter = THREE.LinearFilter;
+      mobileVideoTexture.magFilter = THREE.LinearFilter;
+      mobileVideoTexture.format = THREE.RGBAFormat;
 
-    // Attaching textures
-    if (computerMeshRef.current) {
-      computerMeshRef.current.material.map = computerVideoTexture;
-      computerMeshRef.current.material.needsUpdate = true;
+      // Attaching textures
+      if (computerMeshRef.current) {
+        computerMeshRef.current.material.map = computerVideoTexture;
+        computerMeshRef.current.material.needsUpdate = true;
+      }
+      if (mobileMeshRef.current) {
+        mobileMeshRef.current.material.map = mobileVideoTexture;
+        mobileMeshRef.current.material.needsUpdate = true;
+      }
+
+      // Cleanup
+      return () => {
+        computerVideo.pause();
+        computerVideo.remove();
+        computerVideoTexture.dispose();
+        mobileVideo.pause();
+        mobileVideo.remove();
+        mobileVideoTexture.dispose();
+      };
     }
-    if (mobileMeshRef.current) {
-      mobileMeshRef.current.material.map = mobileVideoTexture;
-      mobileMeshRef.current.material.needsUpdate = true;
-    }
-
-    // Cleanup
-    return () => {
-      computerVideo.pause();
-      computerVideo.remove();
-      computerVideoTexture.dispose();
-      mobileVideo.pause();
-      mobileVideo.remove();
-      mobileVideoTexture.dispose();
-    };
-  }, []);
+  }, [isMobile]);
 
   useFrame((state, delta) => {
     const cameraPos = cameraPosition;
