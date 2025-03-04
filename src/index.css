@@ -42,19 +42,10 @@ canvas {
 .loader-wrapper .loader .loader-progress {
   font-size: 3rem;
   width: 100%;
+  text-align: center;
 }
 .loader-wrapper .loader .loader-progressbar {
   width: 1%;
   height: 2rem;
   background-color: #fff;
-}
-
-@keyframes fadeOut {
-  0% {
-    top: 0;
-  }
-
-  100% {
-    top: -100%;
-  }
 }

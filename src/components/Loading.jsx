@@ -1,10 +1,12 @@
 import { useGSAP } from "@gsap/react";
+import { useProgress } from "@react-three/drei";
 import { addEffect } from "@react-three/fiber";
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 
-const Loading = ({ progress }) => {
-  const [isMobile, setIsMobile] = useState(false);
+const Loading = () => {
+  const { progress } = useProgress();
+  const [isMobile, setIsMobile] = useState(true);
   const loaderRef = useRef();
   const progressRef = useRef();
   const progressBarRef = useRef();
@@ -34,15 +36,7 @@ const Loading = ({ progress }) => {
   return (
     <div ref={loaderRef} className="loader-wrapper">
       <div className="loader">
-        <div
-          ref={progressRef}
-          className="loader-progress"
-          style={
-            isMobile
-              ? { textAlign: "center" }
-              : { transform: `translateX(${progress - 8}%)` }
-          }
-        >
+        <div ref={progressRef} className="loader-progress">
           {progress}%
         </div>
         <div
