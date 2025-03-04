@@ -37,13 +37,8 @@ const Loading = () => {
     <div ref={loaderRef} className="loader-wrapper">
       <div className="loader">
         <div ref={progressRef} className="loader-progress">
-          {progress}%
+          {progress.toFixed(0)}%
         </div>
-        <div
-          ref={progressBarRef}
-          className="loader-progressbar"
-          style={{ width: `${progress}%` }}
-        ></div>
       </div>
     </div>
   );
