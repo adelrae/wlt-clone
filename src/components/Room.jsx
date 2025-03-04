@@ -149,8 +149,12 @@ export default function Room(props) {
     };
 
     if (isMobile) {
-      computerMeshRef.current.material.color.set(new THREE.Color("#fff"));
-      mobileMeshRef.current.material.color.set(new THREE.Color("#fff"));
+      if (computerMeshRef.current) {
+        computerMeshRef.current.material.color.set(new THREE.Color("#fff"));
+      }
+      if (mobileMeshRef.current) {
+        mobileMeshRef.current.material.color.set(new THREE.Color("#fff"));
+      }
     } else {
       // Computer Texure
       const computerVideo = document.createElement("video");
