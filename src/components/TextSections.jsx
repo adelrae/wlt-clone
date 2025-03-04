@@ -48,7 +48,41 @@ const TextSections = () => {
 
   return (
     <>
-      {!isMobile && (
+      {isMobile ? (
+        <>
+          <group position-z={30}>
+            <Text
+              font="/fonts/fonnts.com-Neulis_Sans_Medium.ttf"
+              position={[-0.2, -1.25, 0]}
+              fontSize={0.3}
+              maxWidth={2.5}
+              lineHeight={1}
+            >
+              Elevate Your Digital Presence
+            </Text>
+            <Text
+              font="/fonts/fonnts.com-Neulis_Sans_Regular.ttf"
+              position={[-0.65, -0.7, 0]}
+              color={"#D15606"}
+              fontSize={0.1}
+              letterSpacing={0.2}
+            >
+              Hi, WE ARE WLT DESIGN
+            </Text>
+            <Text
+              font="/fonts/fonnts.com-Neulis_Sans_Regular.ttf"
+              position={[-0.3, -1.9, 0]}
+              color={"#ffffff"}
+              fontSize={0.125}
+              maxWidth={2.3}
+              lineHeight={1.5}
+            >
+              We make great digital experiences. Scroll to find out how we do
+              it.
+            </Text>
+          </group>
+        </>
+      ) : (
         <group position-z={30}>
           <Text
             font="/fonts/fonnts.com-Neulis_Sans_Medium.ttf"
