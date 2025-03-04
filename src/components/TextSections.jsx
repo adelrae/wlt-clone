@@ -13,7 +13,6 @@ const TextSections = () => {
   const { isMobile } = useResponsive();
 
   useFrame((state, delta) => {
-    console.log(textSectionsRef.current);
     textSectionsRef.current?.forEach((textSection) => {
       if (textSection) {
         const distance = cameraPosition?.distanceTo(textSection?.position);

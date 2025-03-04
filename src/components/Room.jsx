@@ -148,60 +148,51 @@ export default function Room(props) {
       muted: true,
     };
 
-    if (isMobile) {
-      if (computerMeshRef.current) {
-        computerMeshRef.current.material.color.set(new THREE.Color("#fff"));
-      }
-      if (mobileMeshRef.current) {
-        mobileMeshRef.current.material.color.set(new THREE.Color("#fff"));
-      }
-    } else {
-      // Computer Texure
-      const computerVideo = document.createElement("video");
-      computerVideo.src = "/model-textures/desktop-video.mp4";
-      computerVideo.crossOrigin = config.crossOrigin;
-      computerVideo.loop = config.loop;
-      computerVideo.muted = config.muted;
-      computerVideo.play();
+    // Computer Texure
+    const computerVideo = document.createElement("video");
+    computerVideo.src = "/model-textures/desktop-video.mp4";
+    computerVideo.crossOrigin = config.crossOrigin;
+    computerVideo.loop = config.loop;
+    computerVideo.muted = config.muted;
+    computerVideo.play();
 
-      const computerVideoTexture = new THREE.VideoTexture(computerVideo);
-      computerVideoTexture.minFilter = THREE.LinearFilter;
-      computerVideoTexture.magFilter = THREE.LinearFilter;
-      computerVideoTexture.format = THREE.RGBAFormat;
+    const computerVideoTexture = new THREE.VideoTexture(computerVideo);
+    computerVideoTexture.minFilter = THREE.LinearFilter;
+    computerVideoTexture.magFilter = THREE.LinearFilter;
+    computerVideoTexture.format = THREE.RGBAFormat;
 
-      // Mobile Texure
-      const mobileVideo = document.createElement("video");
-      mobileVideo.src = "/model-textures/mobile-video.mp4";
-      mobileVideo.crossOrigin = config.crossOrigin;
-      mobileVideo.loop = config.loop;
-      mobileVideo.muted = config.muted;
-      mobileVideo.play();
+    // Mobile Texure
+    const mobileVideo = document.createElement("video");
+    mobileVideo.src = "/model-textures/mobile-video.mp4";
+    mobileVideo.crossOrigin = config.crossOrigin;
+    mobileVideo.loop = config.loop;
+    mobileVideo.muted = config.muted;
+    mobileVideo.play();
 
-      const mobileVideoTexture = new THREE.VideoTexture(mobileVideo);
-      mobileVideoTexture.minFilter = THREE.LinearFilter;
-      mobileVideoTexture.magFilter = THREE.LinearFilter;
-      mobileVideoTexture.format = THREE.RGBAFormat;
+    const mobileVideoTexture = new THREE.VideoTexture(mobileVideo);
+    mobileVideoTexture.minFilter = THREE.LinearFilter;
+    mobileVideoTexture.magFilter = THREE.LinearFilter;
+    mobileVideoTexture.format = THREE.RGBAFormat;
 
-      // Attaching textures
-      if (computerMeshRef.current) {
-        computerMeshRef.current.material.map = computerVideoTexture;
-        computerMeshRef.current.material.needsUpdate = true;
-      }
-      if (mobileMeshRef.current) {
-        mobileMeshRef.current.material.map = mobileVideoTexture;
-        mobileMeshRef.current.material.needsUpdate = true;
-      }
-
-      // Cleanup
-      return () => {
-        computerVideo.pause();
-        computerVideo.remove();
-        computerVideoTexture.dispose();
-        mobileVideo.pause();
-        mobileVideo.remove();
-        mobileVideoTexture.dispose();
-      };
+    // Attaching textures
+    if (computerMeshRef.current) {
+      computerMeshRef.current.material.map = computerVideoTexture;
+      computerMeshRef.current.material.needsUpdate = true;
     }
+    if (mobileMeshRef.current) {
+      mobileMeshRef.current.material.map = mobileVideoTexture;
+      mobileMeshRef.current.material.needsUpdate = true;
+    }
+
+    // Cleanup
+    return () => {
+      computerVideo.pause();
+      computerVideo.remove();
+      computerVideoTexture.dispose();
+      mobileVideo.pause();
+      mobileVideo.remove();
+      mobileVideoTexture.dispose();
+    };
   }, [isMobile]);
 
   useFrame((state, delta) => {
